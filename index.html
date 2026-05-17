@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mental-health.css">
     <title>Mental Health Resource Finder</title>
-
 </head>
 <body>
     <div class="container">
         <h1>Mental Health Resource Finder</h1>
         <p class="subtitle">Find support resources tailored to your needs</p>
 
-        <button id="favoritesBtn" onclick="seeFavorites()">View Saved</button>
+        <button id="favoritesBtn" class="favBtn" onclick="seeFavorites()">View Saved</button>
+        <button id="favoritesBtn" class="homeBtn" onclick="backToHome(resources)">Back</button>
         <div class="search-box">
             <input 
                 type="text" 

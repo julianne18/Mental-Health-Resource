@@ -71,7 +71,6 @@ function displayResources(resourcesToShow) {
             <a href="${resource.website}" target="_blank" class="resource-link">Visit Website →</a>
             <button class="copyLink-btn" onclick="copyToClipboard('${resource.website}')">Copy link</button>
             <button class="fav-btn" onclick="toggleFavorites('${resource.name}')">Save</button>
-
         `;
         
         // Add this card to the container
@@ -88,11 +87,9 @@ document.getElementById("searchInput").addEventListener("input", function(event)
     const searchTerm = event.target.value.toLowerCase();
 
     // TODO: Filter the resources array based on searchTerm
-    // HINT: Use the .filter() method!
     let filteredRes = resources.filter((resource) => 
         resource.name.toLowerCase().trim().includes(searchTerm) || resource.type.toLowerCase().trim().includes(searchTerm)
     );
-    // You want to check if the resource.name or resource.type includes the searchTerm
     // Then display only the filtered results
     // For now, let's display all resources (you'll change this!)
     displayResources(filteredRes);
@@ -142,6 +139,14 @@ function seeFavorites(){
     )
 
     displayResources(favoriteRes);
+    document.querySelector('.favBtn').style.display = "none"
+    document.querySelector('.homeBtn').style.display = "block"
 }
 
 // HOME
+function backToHome(resourcesToShow){
+    displayResources(resourcesToShow);
+
+    document.querySelector('.homeBtn').style.display = "none"
+    document.querySelector('.favBtn').style.display = "block"
+}
