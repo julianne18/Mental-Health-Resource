@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mental-health.css">
+    <title>Mental Health Resource Finder</title>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Mental Health Resource Finder</h1>
+        <p class="subtitle">Find support resources tailored to your needs</p>
+
+        <button id="favoritesBtn" onclick="seeFavorites()">View Saved</button>
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Search by name or type (e.g., 'crisis', 'meditation', 'therapy')..."
+            >
+        </div>
+
+        <!-- This is where our resources will appear! -->
+        <div id="resourcesContainer" class="resources-container"></div>
+    </div>
+
+    <script src="mental-health.js"></script>
+</body>
+</html>
