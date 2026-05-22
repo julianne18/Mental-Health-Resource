@@ -47,21 +47,21 @@ function copyToClipboard(site){
 function displayResources(resourcesToShow) {
     // Get the container where we want to put the resources
     const container = document.getElementById("resourcesContainer");
-    
+
     // Clear whatever was there before
-    container.innerHTML = "";
+    container.innerHTML = " ";
 
     // Check if we have resources to show
-    if (resourcesToShow.length === 0) {
-        container.innerHTML = '<div class="no-results">No resources found. Try a different search!</div>';
-        return;
+    if (resourcesToShow.length === 0){
+        container.innerHTML = `
+            <p class="no-results">No resources to show</p>
+        `
     }
 
     // LOOP through each resource and create HTML for it
     resourcesToShow.forEach(resource => {
         // Create a new div for this resource card
         const card = document.createElement("div");
-        card.className = "resource-card";
         
         // Put the resource info inside the card
         card.innerHTML = `
