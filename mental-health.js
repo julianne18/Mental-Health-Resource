@@ -45,6 +45,8 @@ function copyToClipboard(site){
 
 // ===== FUNCTION: Display resources on the page =====
 function displayResources(resourcesToShow) {
+
+    currentDisplay = resourcesToShow;
     // Get the container where we want to put the resources
     const container = document.getElementById("resourcesContainer");
 
@@ -62,6 +64,11 @@ function displayResources(resourcesToShow) {
     resourcesToShow.forEach(resource => {
         // Create a new div for this resource card
         const card = document.createElement("div");
+
+        let favorites = getFavorites();
+        const isSaved = favorites.includes(resource.name);
+
+        const btnText = isSaved ? "Remove" : "Save"
         
         // Put the resource info inside the card
         card.innerHTML = `
@@ -70,7 +77,7 @@ function displayResources(resourcesToShow) {
             <p class="resource-description">${resource.description}</p>
             <a href="${resource.website}" target="_blank" class="resource-link">Visit Website →</a>
             <button class="copyLink-btn" onclick="copyToClipboard('${resource.website}')">Copy link</button>
-            <button class="fav-btn" onclick="toggleFavorites('${resource.name}')">Save</button>
+            <button class="fav-btn" onclick="toggleFavorites('${resource.name}')">${btnText}</button>
         `;
         
         // Add this card to the container
@@ -96,7 +103,6 @@ document.getElementById("searchInput").addEventListener("input", function(event)
 });
 
 // GET FAVORITES 
-
 function getFavorites(){
     const savedFavorites = localStorage.getItem('favorites');
 
@@ -104,7 +110,6 @@ function getFavorites(){
 }
 
 // SAVE FAVORITES
-
 function saveFavorites(arr){
     const saved = JSON.stringify(arr);
 
@@ -112,21 +117,21 @@ function saveFavorites(arr){
 }
 
 // TOGGLe FAVORITES
-
 function toggleFavorites(resourceName){
-
-    alert('SAVED')
+    //get obj contains all favs
     let favorites = getFavorites();
 
+    // check if name in list or not yet
     if (favorites.includes(resourceName)){
         favorites = favorites.filter(
-            (resource) => resource !== resourceName
+            (favorite) => favorite !== resourceName
         )
     } else {
         favorites.push(resourceName)
     }
 
     saveFavorites(favorites);
+    displayResources(currentDisplay);
 }
 
 // SEE FAVORITES
