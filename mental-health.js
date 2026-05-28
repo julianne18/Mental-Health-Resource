@@ -43,6 +43,9 @@ function copyToClipboard(site){
     alert("Copied to clipboard!");
 }
 
+let currentView;
+let currentDisplay;
+
 // ===== FUNCTION: Display resources on the page =====
 function displayResources(resourcesToShow) {
 
@@ -130,13 +133,21 @@ function toggleFavorites(resourceName){
         favorites.push(resourceName)
     }
 
+    // save to storage
     saveFavorites(favorites);
-    displayResources(currentDisplay);
+
+    // check view then determine visibility/display of card/resource
+    if (currentView){
+        seeFavorites();
+    } else {
+        displayResources(currentDisplay);
+    }
 }
 
 // SEE FAVORITES
 
 function seeFavorites(){
+    currentView = true;
     let favorites = getFavorites();
 
     let favoriteRes = resources.filter(
@@ -144,12 +155,14 @@ function seeFavorites(){
     )
 
     displayResources(favoriteRes);
+
     document.querySelector('.favBtn').style.display = "none"
     document.querySelector('.homeBtn').style.display = "block"
 }
 
 // HOME
 function backToHome(resourcesToShow){
+    currentView = false;
     displayResources(resourcesToShow);
 
     document.querySelector('.homeBtn').style.display = "none"
