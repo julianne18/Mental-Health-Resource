@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Favorite Icon Toggler</title>
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+     <style>
+        .filled{
+            background-color: palevioletred;
+        }
+     </style>
+  </head>
+
+  <body>
+    <!-- Favorite Toggle -->
+    <ul>
+      <li>Cookie <button>&#9825;</button></li>
+      <li>Cake <button>&#9825;</button></li>
+      <li>Cupcake <button>&#9825;</button></li>
+    </ul>
+
+    <!-- Char Counter -->
+    <textarea type="text" id="text-input"></textarea>
+    <p id="char-count">Character Count: 0/50</p>
+    
+  </body>
+
+  <script>
+
+    // FAV TOGGLE JS
+    const buttons = document.querySelectorAll("button")
+
+    buttons.forEach( (button) =>
+        button.addEventListener(
+          "click", () => 
+          {button.classList.toggle("filled");
+          button.innerHTML = button.classList.contains("filled") ? "&#10084;" :  "&#9825;";}
+        )
+    )
+
+    // CHAR COUNTER
+    const userInput = document.getElementById("text-input");
+    const charCount = document.getElementById("char-count");
+    const maxCount = 50;
+
+    function updateCount(){
+      const currentCount = userInput.value.length;
+      
+      if (currentCount >= maxCount){
+        userInput.value = userInput.value.substring(0, 49);
+      }
+
+      charCount.textContent = `Character Count: ${currentCount}/${maxCount}`;
+
+      if (currentCount >= maxCount){
+        charCount.style.color = "red";
+      }
+    };
+
+    userInput.addEventListener("input", updateCount);
+
+    updateCount();
+    /*
+    1. !! Get DOM Elements DONE!!
+    2. Add to count for each char
+    3. Limit input to 20 Characters only
+    */ 
+
+  </script>
+</html>
